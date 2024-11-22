@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 // import './style.css';
 
 export default function RandomColor() {
@@ -28,9 +29,13 @@ export default function RandomColor() {
         const g = randomColorUtility(256);
         const b = randomColorUtility(256);
 
-        setColor(`rgb${r}, ${g}, ${b}`);
+        setColor(`rgb(${r}, ${g}, ${b})`);
     }
 
+    useEffect(()=> {
+        if(typeOfColor === 'rgb') handleCreateRgbRandomColor();
+        else handleCreateHexRandomColor();
+    }, [typeOfColor]);
 
     return <div style={{
         width: "100vw",
@@ -45,7 +50,7 @@ export default function RandomColor() {
     }}
     >
         <span style={{color:"white", display:"flex", fontSize:"30px"}}>{color}</span>
-        <button onClick={typeOfColor === 'hex' ? handleCreateHexRandomColor : handleCreateRgbRandomColor()}>Generate Random Color</button>
+        <button onClick={typeOfColor === 'hex' ? handleCreateHexRandomColor : handleCreateRgbRandomColor}>Generate Random Color</button>
         <button onClick={() => setTypeOfColor('hex')}>HEX Color</button>
         <button onClick={() => setTypeOfColor('rgb')}>RGB Color</button>
     </div>
