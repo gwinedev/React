@@ -2,56 +2,53 @@ import React, { useState } from 'react';
 import data from "./data";
 import './style.css';
 
-// single selection
-// multiple selection
-
 export default function Accordion() {
-    const [selected, setSelected] = useState(null);
-    const [enableMultipleSelection, setEnableMultipleSelection] = useState(false);
+    const [selected, setSelected] = useState(null); // For single selection
+    const [enableMultipleSelection, setEnableMultipleSelection] = useState(false); // Toggle selection mode
+    const [multiple, setMultiple] = useState([]); // For multiple selection
 
-    const [multiple, setMultiple] = useState([]);
-
-    function handleSingleSelection(id){
+    function handleSingleSelection(id) {
         setSelected(id === selected ? null : id);
     }
 
     function handleMultipleSelection(id) {
-        let copyMultiple = [...multiple];
-        const IndexCurrentId = copyMultiple.indexOf(id);
-
-        if(IndexCurrentId === -1)
-            copyMultiple.push(id)
-        else   
-            copyMultiple.splice(IndexCurrentId, 1)
-        setMultiple(copyMultiple);
+        const updatedSelection = multiple.includes(id)
+            ? multiple.filter(itemId => itemId !== id) // Remove ID if already selected
+            : [...multiple, id]; // Add ID if not selected
+        setMultiple(updatedSelection);
     }
-    console.log(selected,multiple);
 
+    return (
+        <div className="wrapper">
+            <button onClick={() => setEnableMultipleSelection(!enableMultipleSelection)}>
+                {enableMultipleSelection ? "Disable" : "Enable"} Multiple Selection
+            </button>
 
-    return <div className="wrapper">
-        <button onClick={() => setEnableMultipleSelection(!enableMultipleSelection)}>Enable Multiple Selection</button>
-        <div className='accordion'>
-            {
-                data && data.length > 0 ? data.map(dataItem=>
-                <div className='item'>
-                    <div onClick={
-                        enableMultipleSelection
-                            ? () => handleSingleSelection(dataItem.id)
-                            : () => handleMultipleSelection(dataItem.id)
-                    }
-                        className='title'
-                >
-                        <h3>{dataItem.question}</h3>
-                        <span>+</span>
-                    </div>
-                    {
-                        selected === dataItem.id ?
-                        <div className='content'>{dataItem.answer}</div>
-                        : null
-                    }
-                </div>)
-                :<div>No data found</div>
-            }
+            <div className="accordion">
+                {data && data.length > 0 ? (
+                    data.map(dataItem => (
+                        <div className="item" key={dataItem.id}>
+                            <div
+                                onClick={() =>
+                                    enableMultipleSelection
+                                        ? handleMultipleSelection(dataItem.id)
+                                        : handleSingleSelection(dataItem.id)
+                                }
+                                className="title"
+                            >
+                                <h3>{dataItem.question}</h3>
+                                <span>+</span>
+                            </div>
+
+                            {(selected === dataItem.id || multiple.includes(dataItem.id)) && (
+                                <div className="content">{dataItem.answer}</div>
+                            )}
+                        </div>
+                    ))
+                ) : (
+                    <div>No data found</div>
+                )}
+            </div>
         </div>
-    </div>;
+    );
 }
