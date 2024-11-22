@@ -1,0 +1,62 @@
+/* Global reset and font setup */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom right, #ff7eb3, #ff758c, #ffba7c);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main container */
+.container {
+    text-align: center;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 30px 20px;
+    max-width: 350px;
+    width: 100%;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Buttons style */
+.container button {
+    background: linear-gradient(to bottom right, #6a11cb, #2575fc);
+    color: white;
+    font-size: 18px;
+    padding: 12px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
+}
+
+/* Button hover effects */
+.container button:hover {
+    background: linear-gradient(to bottom right, #2575fc, #6a11cb);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Button active (click) effects */
+.container button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
