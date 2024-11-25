@@ -34,6 +34,6 @@ export default function StarRating({ starCount = 5 }) {
                 />
             })
         }
-        <span style={{display: 'flex', alignContent:'center', justifyContent:'center'}}>ratings: {rating}</span>
+        <span style={{ display: 'flex', alignContent: 'center', justifyContent: 'center' }}>ratings: {rating}</span>
     </div>
 }
