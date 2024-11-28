@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
+
 * {
   box-sizing: border-box;
 }
@@ -36,6 +37,10 @@ nav > span {
 
 main {
   padding: 60px 30px;
+  background-image: url(/Tutorial/src/images/rb.png);
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: bottom;
 }
 
 main > h1 {
@@ -46,4 +51,15 @@ main > h1 {
 .facts-list {
   margin-top: 46px;
   max-width: 400px;
+  text-align: left;
+}
+
+.facts-list > li {
+  margin-block: 10px;
+  line-height: 19px;
+}
+
+.facts-list > li::marker {
+  color: #61dafb;
+  font-size: 1.5rem;
 }
