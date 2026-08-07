@@ -1,9 +1,12 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 
 import HomePage from "./page/homepage/homepage.component";
 
 const HatsPage = () => {
+  const navigate = useLocation();
+  console.log(navigate);
+
   return (
     <div>
       <h1>HATS PAGE</h1>
@@ -14,10 +17,10 @@ const HatsPage = () => {
 function App() {
   return (
     <div>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path='/hats' element={<HatsPage />} />
-        </Routes>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/hats" element={<HatsPage />} />
+      </Routes>
     </div>
   );
 }
